@@ -1,0 +1,16 @@
+{
+  "name": "moodle-calendar",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ."
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "edge-paths": "^2.1.0",
+    "puppeteer-core": "^5.2.1"
+  }
+}
