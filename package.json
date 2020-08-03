@@ -1,10 +1,9 @@
 {
   "name": "moodle-calendar",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node ."
+    "start": "node src/index.js"
   },
   "keywords": [],
   "author": "",

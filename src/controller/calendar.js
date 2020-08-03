@@ -1,21 +1,43 @@
 const puppeteer = require("puppeteer-core");
 
+async function Calendar(page) {
+  await page.goto(
+    "https://moodle.unicentro.br/calendar/view.php?view=month",
+    {
+      waitUntil: "load",
+      timeout: 0,
+    }
+  );
+
+  await page.waitForSelector(".calendarmonth > tbody > tr");
+
+  try {
+    const tasks = await page.evaluate(() => {
+
+      let links = document.querySelectorAll(
+        "tbody > tr > td > div.d-none > div > ul > li > a"
+      );
+
+      return Array.from(links).map((link) => {
+        return link.href;
+      });
+    });
+    console.log(tasks);
+  } catch (error) {
+    console.log("Evaluate error: \n", error);
+  }
+}
+
+module.exports = Calendar;
+
+
 // function dale () {
 //     Promise.race([
 
 //     ])
 // }
 
-async function Calendar(page) {
-  await page.goto("https://moodle.unicentro.br/calendar/view.php?view=month&time=1593572400", {
-    waitUntil: "load",
-    timeout: 0
-  });
-
-  await page.waitForSelector(".calendarmonth > tbody > tr");
-
-  const tasks = await page.evaluate(() => {
-    /*
+/*
     let weeks = document.querySelectorAll(".calendarmonth > tbody > tr");
     let results = { Semanas: [] };
     console.log("entro na funcao");
@@ -42,13 +64,3 @@ async function Calendar(page) {
     });
     
     */
-
-    let links = document.querySelectorAll('tbody > tr > td > div.d-none > div > ul > li > a')
-
-    return Array.from(links).map( (link) => { return link.href } );
-  });
-
-  console.log(tasks);
-}
-
-module.exports = Calendar;
