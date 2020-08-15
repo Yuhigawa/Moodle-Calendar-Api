@@ -8,5 +8,8 @@ You need to put your `login` and `password` in ``\assets\config.json`` before st
 
 to run:
 ```bash
+~ git clone
+~ cd Moodle-Calendar
+~ npm install
 ~ node src/index.js
 ```
