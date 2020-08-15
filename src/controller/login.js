@@ -10,6 +10,7 @@ const cookies = require("./../assets/cookies.json");
 async function startBrowser() {
   const browser = await puppeteer.launch({
     executablePath: edgePaths.getEdgePath(),
+    ignoreHTTPSErrors: true,
   });
 
   const page = await browser.newPage();
@@ -46,12 +47,15 @@ async function playTest(url, page) {
     let currentCookies = await page.cookies();
 
     try {
-      fs.writeFileSync("./src/assets/cookies.json", JSON.stringify(currentCookies));
+      fs.writeFileSync(
+        "./src/assets/cookies.json",
+        JSON.stringify(currentCookies)
+      );
     } catch (error) {
       console.log("File Reading: \n" + error);
     }
 
-    playTest(url, page);
+    // playTest(url, page);
   }
 }
 

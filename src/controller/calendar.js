@@ -22,7 +22,9 @@ async function Calendar(page) {
         return link.href;
       });
     });
-    console.log(tasks);
+    
+    return tasks;
+    
   } catch (error) {
     console.log("Evaluate error: \n", error);
   }
