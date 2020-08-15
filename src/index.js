@@ -27,15 +27,6 @@ const { playTest, startBrowser, closeBrowser } = require("./controller/login");
 		console.log("dayDate error: \n" + error);
 	}
 
-	// console.log(links)
-	// let deliveryDate = await getDateTime(page, links).catch((error) =>
-	//     console.log("data time error: \n" + error)
-	// );
-
-	// console.log(deliveryDate)
-
-	// await page.waitFor(3000)
-
 	await closeBrowser(browser);
 
 	process.exit(1);
