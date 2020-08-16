@@ -1,6 +1,6 @@
 const Calendar = require("./controller/calendar");
 const getDateTime = require("./controller/getDateTime");
-const { playTest, startBrowser, closeBrowser } = require("./controller/login");
+const { Login, startBrowser, closeBrowser } = require("./controller/login");
 
 (async () => {
 	const { browser, page } = await startBrowser();
@@ -8,7 +8,7 @@ const { playTest, startBrowser, closeBrowser } = require("./controller/login");
 	let links;
 
 	try {
-		await playTest(url, page);
+		await Login(page, url);
 	} catch (error) {
 		console.log("Login Error: \n" + error);
 	}

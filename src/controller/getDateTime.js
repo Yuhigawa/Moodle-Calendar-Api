@@ -9,6 +9,9 @@ async function getDateTime(page, links) {
 
 			toDo.Tasks.push({
 				Link: links[link],
+				Course: await page.evaluate(() => {
+					return document.querySelector(".page-header-headings > h1").textContent.split(" (")[0]
+				}),
 				deliveryDate: await page.evaluate(() => {
 					for (
 						let a = 0;

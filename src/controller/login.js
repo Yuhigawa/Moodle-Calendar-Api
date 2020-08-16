@@ -22,14 +22,14 @@ async function closeBrowser(browser) {
   return browser.close();
 }
 
-async function playTest(url, page) {
+async function Login(page, url) {
   if (Object.keys(cookies).length) {
     await page.setCookie(...cookies);
 
-    await page.goto(url, { waitUntil: "networkidle2" });
+    await page.goto(url, { waitUntil: "load", timeout: 0 });
   } else {
     await page.goto("https://moodle.unicentro.br/login/index.php", {
-      waitUntil: "networkidle0",
+      waitUntil: "load",
     });
 
     await page.type("div.form-input > input#username", config.login, {
@@ -41,8 +41,8 @@ async function playTest(url, page) {
 
     await page.click("input#loginbtn");
 
-    await page.waitForNavigation({ waitUntil: "networkidle2" });
-    await page.waitFor(15000);
+    await page.waitForNavigation({ waitUntil: "load", timeout: 0 });
+    // await page.waitFor(15000);
 
     let currentCookies = await page.cookies();
 
@@ -54,9 +54,7 @@ async function playTest(url, page) {
     } catch (error) {
       console.log("File Reading: \n" + error);
     }
-
-    // playTest(url, page);
   }
 }
 
-module.exports = { playTest, startBrowser, closeBrowser };
+module.exports = { Login, startBrowser, closeBrowser };
