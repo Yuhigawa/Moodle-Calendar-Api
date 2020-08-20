@@ -4,25 +4,23 @@ async function getDateTime(page, links) {
 	try {
 		let toDo = { Tasks: [] };
 
-		for (let link in links) {
-			await page.goto(links[link], { waitUntil: "load" });
+		for (link of links) {
+			await page.goto(link, { waitUntil: "load" });
 
 			toDo.Tasks.push({
-				Link: links[link],
+				Link: link,
 				Course: await page.evaluate(() => {
-					return document.querySelector(".page-header-headings > h1").textContent.split(" (")[0]
+					return document
+						.querySelector(".page-header-headings > h1")
+						.textContent.split(" (")[0];
 				}),
 				deliveryDate: await page.evaluate(() => {
-					for (
-						let a = 0;
-						a < document.querySelectorAll("tr > td.cell.c0").length;
-						a++
-					) {
+					for (let index in document.querySelectorAll("tr > td.cell.c0")) {
 						if (
-							document.querySelectorAll("tr > td.cell.c0")[a].textContent ===
-							"Data de entrega"
+							document.querySelectorAll("tr > td.cell.c0")[index]
+								.textContent === "Data de entrega"
 						) {
-							return document.querySelectorAll("tr > td.cell.c1")[a]
+							return document.querySelectorAll("tr > td.cell.c1")[index]
 								.textContent;
 						}
 					}
