@@ -24,7 +24,7 @@ const { Login, startBrowser, closeBrowser } = require("./controller/login");
 
 		console.log(deliveryDate);
 	} catch (error) {
-		console.log("dayDate error: \n" + error);
+		console.log("deliveryDate error: \n" + error);
 	}
 
 	await closeBrowser(browser);
