@@ -53,15 +53,15 @@ async function getAccessToken(oAuth2Client, callback) {
 	const authUrl = oAuth2Client.generateAuthUrl({
 		access_type: "offline",
 		scope: SCOPES,
-    });
-    
+	});
+
 	await opn(authUrl);
 
 	const rl = readline.createInterface({
 		input: process.stdin,
 		output: process.stdout,
-    });
-    
+	});
+
 	rl.question("Enter the code from that page here: ", (code) => {
 		rl.close();
 		oAuth2Client.getToken(code, (err, token) => {
@@ -107,57 +107,55 @@ function listEvents(auth) {
 }
 
 async function createEvents(auth) {
-    let taskArray;
-    try {
-        taskArray = Array.from(deliveryDate.Tasks).map((entity) => {
-            return {
-                link: entity.Link,
-                course: entity.Course,
-                endTime: entity.endTime,
-                startTime: entity.startTime,
-            };
-        });
-        
-    } catch (err) {
-        console.error("jsonEntity error: \n" + err)
-    }
-    
-    console.log(taskArray)
+	let taskArray;
+	try {
+		taskArray = Array.from(deliveryDate.Tasks).map((entity) => {
+			return {
+				link: entity.Link,
+				course: entity.Course,
+				endTime: entity.endTime,
+				startTime: entity.startTime,
+			};
+		});
+	} catch (err) {
+		console.error("jsonEntity error: \n" + err);
+	}
 
-    const calendar = google.calendar({ version: "v3", auth });
-    let event;
+	console.log(taskArray);
 
-    taskArray.forEach(items => {
-        event = {
-            'summary': items.course,
-            'location': items.link,
-            'start': {
-                'dateTime': items.startTime,
-                'timeZone': 'America/Sao_Paulo'
-            },
-            'end': {
-                'dateTime': items.endTime,
-                'timeZone': 'America/Sao_Paulo'
-            }
-        }
+	const calendar = google.calendar({ version: "v3", auth });
+	let event;
 
-        calendar.events.insert(
-            {
-                calendarId: "primary",
-                auth: auth,
-                resource: event,
-            },
-            (err) => {
-                if (err) {
-                    console.error("insertCalendar error: \n" + err);
-                    return;
-                }
-    
-                console.error("Event sucessfily created");
-            }
-        );
+	taskArray.forEach((items) => {
+		event = {
+			summary: items.course,
+			location: items.link,
+			start: {
+				dateTime: items.startTime,
+				timeZone: "America/Sao_Paulo",
+			},
+			end: {
+				dateTime: items.endTime,
+				timeZone: "America/Sao_Paulo",
+			},
+		};
 
-    })
+		calendar.events.insert(
+			{
+				calendarId: "primary",
+				auth: auth,
+				resource: event,
+			},
+			(err) => {
+				if (err) {
+					console.error("insertCalendar error: \n" + err);
+					return;
+				}
+
+				console.error("Event sucessfily created");
+			}
+		);
+	});
 }
 
 // [END calendar_quickstart]
@@ -165,6 +163,6 @@ async function createEvents(auth) {
 module.exports = {
 	startGoogleCalendarApi,
 	authorize,
-    createEvents,
-    listEvents
+	createEvents,
+	listEvents,
 };
