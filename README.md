@@ -10,11 +10,11 @@ Put the data into Google's Calendar automaticaly without rewriting the older one
 
 ## Usage
 
-You need to put your `login` and `password` in ``src\assets\config.json`` before starting the API.
+You need to put your `login` and `password` in ``src/assets/config.json`` before starting the API.
 
 to run:
 ```bash
-~ git clone
+~ git clone git@github.com:Yuhigawa/Moodle-Calendar-Api.git
 ~ cd Moodle-Calendar
 ~ npm install
 ~ node src/index.js
