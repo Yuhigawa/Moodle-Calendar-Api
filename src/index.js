@@ -30,11 +30,7 @@ const fs = require("fs");
 			JSON.stringify(deliveryDate)
 		);
 	} catch (error) {
-<<<<<<< HEAD
-		console.error("dayDate error: \n" + error);
-=======
 		console.log("deliveryDate error: \n" + error);
->>>>>>> bb353639dd069969b7631a73007e8c08732084f7
 	}
 
 	await closeBrowser(browser);
