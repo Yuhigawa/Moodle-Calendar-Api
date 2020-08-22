@@ -8,6 +8,8 @@
   "author": "Yuhigawa",
   "dependencies": {
     "edge-paths": "^2.1.0",
+    "googleapis": "^39.2.0",
+    "opn": "^6.0.0",
     "puppeteer-core": "^5.2.1"
   }
 }

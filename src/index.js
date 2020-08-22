@@ -1,6 +1,9 @@
 const Calendar = require("./controller/calendar");
 const getDateTime = require("./controller/getDateTime");
 const { Login, startBrowser, closeBrowser } = require("./controller/login");
+const { startGoogleCalendarApi } = require("./controller/googleCalendarAuth")
+
+const fs = require("fs");
 
 (async () => {
 	const { browser, page } = await startBrowser();
@@ -10,24 +13,33 @@ const { Login, startBrowser, closeBrowser } = require("./controller/login");
 	try {
 		await Login(page, url);
 	} catch (error) {
-		console.log("Login Error: \n" + error);
+		console.error("Login Error: \n" + error);
 	}
 
 	try {
 		links = await Calendar(page);
 	} catch (error) {
-		console.log("Calendar Error: \n" + error);
+		console.error("Calendar Error: \n" + error);
 	}
 
 	try {
 		let deliveryDate = await getDateTime(page, links);
 
-		console.log(deliveryDate);
+		fs.writeFileSync(
+			"./src/assets/deliveryDate.json",
+			JSON.stringify(deliveryDate)
+		);
 	} catch (error) {
-		console.log("dayDate error: \n" + error);
+		console.error("dayDate error: \n" + error);
 	}
 
 	await closeBrowser(browser);
 
-	process.exit(1);
+	try {
+		startGoogleCalendarApi();
+	} catch (error) {
+		console.error("googleApi error: \n" + error);
+	}
+
+	// process.exit(1);
 })();
