@@ -24,7 +24,8 @@ async function getDateTime(page, links) {
 					.querySelector(".page-header-headings > h1")
 					.textContent.split(" (")[0];
 			});
-
+			
+			// TODO: automatically interpret the year's months
 			let endTime = `${aux.split(", ")[1].split(" ")[2]}-08-${
 				aux.split(", ")[1].split(" ")[0]
 			}T${aux.split(", ")[2]}:00-03:00`;
