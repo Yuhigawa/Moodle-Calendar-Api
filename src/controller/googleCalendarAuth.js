@@ -158,8 +158,6 @@ async function createEvents(auth) {
 	});
 }
 
-// [END calendar_quickstart]
-
 module.exports = {
 	startGoogleCalendarApi,
 	authorize,
