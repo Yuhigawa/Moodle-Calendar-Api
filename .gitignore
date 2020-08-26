@@ -1,4 +1,4 @@
 node_modules
 .vscode
 .prettierrc
-src\assets\credentials.json
+src/assets/credentials.json
